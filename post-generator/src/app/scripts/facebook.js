@@ -1,14 +1,22 @@
-// import fb from 'facebook-js-sdk';
+const FB = require('fb');
 
-// fb.initialize({
-//   appId: '862976008996687',
-//   cookie: true,
-//   xfbml: true,
-//   version: 'v13.0'
-// });
+const appId = 'YOUR_APP_ID';
+const appSecret = 'YOUR_APP_SECRET';
+const accessToken = 'YOUR_ACCESS_TOKEN';
 
-// export const getFacebookPosts = (pageId) => {
-//   return Facebook.api(`/${pageId}/feed`, 'get', {
-//     fields: 'id,permalink_url,created_time,message'
-//   });
-// };
+const graphAPI = new FB.GraphAPI({
+  version: 'v13.0',
+  appId: appId,
+  appSecret: appSecret,
+  accessToken: accessToken
+});
+
+// Ejemplo de consulta para obtener información del perfil del usuario actual
+graphAPI.get('/me', (error, response) => {
+  if (error) {
+    console.error(error);
+    return;
+  }
+
+  console.log(response);
+});
