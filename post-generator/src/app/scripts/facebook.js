@@ -1,22 +1,16 @@
-const FB = require('fb');
+import axios from 'axios';
 
-const appId = 'YOUR_APP_ID';
-const appSecret = 'YOUR_APP_SECRET';
-const accessToken = 'YOUR_ACCESS_TOKEN';
-
-const graphAPI = new FB.GraphAPI({
-  version: 'v13.0',
-  appId: appId,
-  appSecret: appSecret,
-  accessToken: accessToken
+const facebookAPI = axios.create({
+  baseURL: 'https://graph.facebook.com/v.20.0/',
 });
-
-// Ejemplo de consulta para obtener información del perfil del usuario actual
-graphAPI.get('/me', (error, response) => {
-  if (error) {
+facebookAPI.get('/me', {
+  params: {
+    access_token: 'EAAMQ30J3R08BO7EsttfcoGSRrfRNh4CEKFqwgeZA0ZBGBHFLqWJFeTtrk9rAcAsqHWnTB0tEmN71V6Gr9wUUkeJuW24zC3sKIKQo5z3NGf3BwYj8OSBXNfinu4DhTjQiiZApvuLMqdJUZCZBVURYcSI8gKpABTHqBHD12pwG3Tw8dkURxB8mZB4GFTRTwszHgSHPjNAIOaXiBGNmOgLTnDmQZDZD',
+  },
+})
+  .then(response => {
+    console.log(response.data);
+  })
+  .catch(error => {
     console.error(error);
-    return;
-  }
-
-  console.log(response);
-});
+  });
